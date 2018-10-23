@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var tempMinTextField: UITextField!
     @IBOutlet weak var tempMaxTextField: UITextField!
     @IBOutlet weak var windSpeedTextField: UITextField!
-    @IBOutlet weak var windDirectionTextField: UITextField!
     @IBOutlet weak var windDirectionImageView: UIImageView!
     @IBOutlet weak var airPressureTextField: UITextField!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var arrowImageView: UIImageView!
     
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -26,12 +26,15 @@ class ViewController: UIViewController {
     var currentDayNumber = Int()
     var currentCityData = [String: Any]()
     var currentDayData = [String: Any]()
+    var startingWindDirTransform = CGAffineTransform()
     
     var weatherImages = [String: UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         readWeatherData()
+        self.arrowImageView.transform = self.arrowImageView.transform.rotated(by: CGFloat(Double.pi / -4))
+        self.startingWindDirTransform = self.arrowImageView.transform
     }
     
     func readWeatherData() {
@@ -88,10 +91,12 @@ class ViewController: UIViewController {
         setNumberValue(name: "min_temp", textField: tempMinTextField)
         setNumberValue(name: "max_temp", textField: tempMaxTextField)
         setNumberValue(name: "wind_speed", textField: windSpeedTextField)
-        setNumberValue(name: "wind_direction", textField: windDirectionTextField)
         setNumberValue(name: "air_pressure", textField: airPressureTextField)
         
         dateLabel.text = "\(currentDayData["applicable_date"]!)"
+        
+        let windDir = "\(currentDayData["wind_direction"]!)"
+        self.arrowImageView.transform = self.startingWindDirTransform.rotated(by: CGFloat(Double(windDir)! * Double.pi / 180))
         
         self.setNeedsFocusUpdate()
     }
