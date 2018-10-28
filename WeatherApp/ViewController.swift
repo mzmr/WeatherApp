@@ -76,11 +76,7 @@ class ViewController: UIViewController {
         windSpeedTextField.text = dailyForecast.windSpeed
         airPressureTextField.text = dailyForecast.airPressure
         dateLabel.text = dailyForecast.date
-        
         arrowImageView.transform = startingWindDirTransform.rotated(by: CGFloat(Double(dailyForecast.windDir)! * Double.pi / 180))
-        
-        let windDir = "\(currentDayData["wind_direction"]!)"
-        self.arrowImageView.transform = self.startingWindDirTransform.rotated(by: CGFloat(Double(windDir)! * Double.pi / 180))
         
         self.setNeedsFocusUpdate()
     }
