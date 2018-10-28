@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     
+    
     var currentLocationForecast = LocationForecast()
     var startingWindDirTransform = CGAffineTransform()
     var currentCity: String? {
@@ -78,6 +79,9 @@ class ViewController: UIViewController {
         
         arrowImageView.transform = startingWindDirTransform.rotated(by: CGFloat(Double(dailyForecast.windDir)! * Double.pi / 180))
         
+        let windDir = "\(currentDayData["wind_direction"]!)"
+        self.arrowImageView.transform = self.startingWindDirTransform.rotated(by: CGFloat(Double(windDir)! * Double.pi / 180))
+        
         self.setNeedsFocusUpdate()
     }
     
@@ -89,8 +93,8 @@ class ViewController: UIViewController {
         updateView(dailyForecast: currentLocationForecast.getNextForecast())
     }
     
-
 }
+
 
 extension ViewController: CitySelectionDelegate {
     func citySelected(_ cityId: String) {
