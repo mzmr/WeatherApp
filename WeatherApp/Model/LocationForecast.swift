@@ -13,6 +13,7 @@ class LocationForecast {
     var dailyForecastList = [DailyForecast]()
     var currentDayNumber = Int()
     var cityName = String()
+    var cityId = String()
     
     init() {
         
@@ -27,27 +28,22 @@ class LocationForecast {
         
         currentDayNumber = 0
         cityName = "\(data["title"]!)"
+        cityId = "\(data["woeid"]!)"
     }
     
-    func getCurrentForecast() -> DailyForecast {
+    func getDailyForecast() -> DailyForecast {
         return dailyForecastList[currentDayNumber]
     }
     
-    func getPreviousForecast() -> DailyForecast {
+    func previousForecast() {
         if currentDayNumber > 0 {
             currentDayNumber -= 1
-            return dailyForecastList[currentDayNumber]
-        } else {
-            return dailyForecastList[currentDayNumber]
         }
     }
     
-    func getNextForecast() -> DailyForecast {
+    func nextForecast() {
         if currentDayNumber < dailyForecastList.count - 1 {
             currentDayNumber += 1
-            return dailyForecastList[currentDayNumber]
-        } else {
-            return dailyForecastList[currentDayNumber]
         }
     }
 }

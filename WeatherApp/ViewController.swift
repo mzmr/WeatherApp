@@ -24,11 +24,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     
     
-    var currentLocationForecast = LocationForecast()
     var startingWindDirTransform = CGAffineTransform()
-    var currentCity: String? {
+    var currentCityForecast: LocationForecast! {
         didSet {
-            readWeatherData()
+            updateView()
         }
     }
     
@@ -38,37 +37,21 @@ class ViewController: UIViewController {
         self.startingWindDirTransform = self.arrowImageView.transform
     }
     
-    func setLocation(cityId: String) {
-        WeatherAPI().getLocationForecast(locationId: cityId, callback: saveDataAndUpdateView)
-    }
-    
-    func readWeatherData() {
-        if let city = currentCity {
-            WeatherAPI().getLocationForecast(locationId: city, callback: saveDataAndUpdateView)
-        }
-    }
-    
-    func saveDataAndUpdateView(forecast: LocationForecast) {
-        DispatchQueue.main.async {
-            self.currentLocationForecast = forecast
-            self.updateView(dailyForecast: forecast.getCurrentForecast())
-        }
-    }
-    
-    func updateView(dailyForecast: DailyForecast) {
-        if currentLocationForecast.currentDayNumber == 0 {
+    func updateView() {
+        if currentCityForecast.currentDayNumber == 0 {
             previousButton.isEnabled = false
         } else {
             previousButton.isEnabled = true
         }
         
-        if currentLocationForecast.currentDayNumber == currentLocationForecast.dailyForecastList.count - 1 {
+        if currentCityForecast.currentDayNumber == currentCityForecast.dailyForecastList.count - 1 {
             nextButton.isEnabled = false
         } else {
             nextButton.isEnabled = true
         }
         
-        cityLabel.text = currentLocationForecast.cityName
+        cityLabel.text = currentCityForecast.cityName
+        let dailyForecast = currentCityForecast.getDailyForecast()
         iconImageView.image = UIImage(named: dailyForecast.stateAbbr)
         conditionsLabel.text =  dailyForecast.conditions
         tempMinTextField.text = dailyForecast.tempMin
@@ -82,18 +65,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onPreviousButtonTouchUp(_ sender: UIButton) {
-        updateView(dailyForecast: currentLocationForecast.getPreviousForecast())
+        currentCityForecast.previousForecast()
+        updateView()
     }
     
     @IBAction func onNextButtonTouchUp(_ sender: UIButton) {
-        updateView(dailyForecast: currentLocationForecast.getNextForecast())
+        currentCityForecast.nextForecast()
+        updateView()
     }
     
 }
 
 
 extension ViewController: CitySelectionDelegate {
-    func citySelected(_ cityId: String) {
-        currentCity = cityId
+    func selectedCityForecast(_ forecast: LocationForecast) {
+        currentCityForecast = forecast
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CitySelectionDelegate: class {
-    func citySelected(_ cityId: String)
+    func selectedCityForecast(_ forecast: LocationForecast)
 }
 
 class MasterViewController: UITableViewController {
@@ -20,16 +20,62 @@ class MasterViewController: UITableViewController {
         City(name: "Caracas", id: "395269")
     ]
     
+    var cityCells = [Int: String]() //cell tag: city id
+    
+    var forecasts = [String: LocationForecast]()
+    
     weak var delegate: CitySelectionDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        readWeather()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func readWeather() {
+        for city in cities {
+            print("getting forecast for \(city.name)")
+            WeatherAPI().getLocationForecast(locationId: city.id, callback: saveDataAndUpdateView)
+        }
+    }
+    
+    func saveDataAndUpdateView(forecast: LocationForecast) {
+        DispatchQueue.main.async {
+            print("list callback - \(forecast.cityName)")
+            self.forecasts[forecast.cityId] = forecast
+            self.updateView(locationForecast: forecast)
+        }
+    }
+    
+    func updateView(locationForecast: LocationForecast) {
+        let cellsOpt = self.tableView?.visibleCells
+        
+        if let cells = cellsOpt {
+            for cell in cells {
+                let cityId = cityCells[cell.tag]
+                
+                print("CityId: \(cityId!), cellTag: \(cell.tag)")
+                
+                if cityId == locationForecast.cityId {
+                    let forecast = locationForecast.getDailyForecast()
+//                    let stateAbbr = .stateAbbr
+                    cell.imageView?.image = UIImage(named: forecast.stateAbbr)
+                    cell.detailTextLabel?.text = "\(forecast.temp)°C"
+                    
+                    if cityId == cities[0].id {
+                        delegate?.selectedCityForecast(locationForecast)
+                    }
+                    
+                    break
+                }
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -47,12 +93,15 @@ class MasterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = cities[indexPath.row].name
+        cell.tag = indexPath.row
+        cityCells[cell.tag] = cities[indexPath.row].id
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity = cities[indexPath.row]
-        delegate?.citySelected(selectedCity.id)
+        delegate?.selectedCityForecast(forecasts[selectedCity.id]!)
         
         if let detailViewController = delegate as? ViewController {
             splitViewController?.showDetailViewController(detailViewController, sender: nil)

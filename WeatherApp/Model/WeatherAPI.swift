@@ -27,9 +27,7 @@ class WeatherAPI {
                         do {
                             let jsonObject = try JSONSerialization.jsonObject(with: goodData, options: []) as? [String: Any]
                             let forecast = LocationForecast(data: jsonObject!)
-//                            DispatchQueue.main.async {
                                 callback(_:forecast)
-//                            }
                         } catch let err {
                             print("error2: \(err)")
                         }

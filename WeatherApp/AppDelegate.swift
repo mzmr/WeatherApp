@@ -21,9 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let detailViewController = splitViewController.viewControllers.last as? ViewController
             else { fatalError() }
         
-        let firstCity = masterViewController.cities.first
-        detailViewController.setLocation(cityId: firstCity!.id)
-        
         masterViewController.delegate = detailViewController
         
         return true

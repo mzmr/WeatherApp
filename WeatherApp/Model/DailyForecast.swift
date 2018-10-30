@@ -14,6 +14,7 @@ class DailyForecast {
     var conditions = String()
     var tempMin = String()
     var tempMax = String()
+    var temp = String()
     var windSpeed = String()
     var airPressure = String()
     var date = String()
@@ -25,6 +26,7 @@ class DailyForecast {
         
         tempMin = getRoundedValue(name: "min_temp", data: data)
         tempMax = getRoundedValue(name: "max_temp", data: data)
+        temp = getRoundedValue(name: "the_temp", data: data)
         windSpeed = getRoundedValue(name: "wind_speed", data: data)
         airPressure = getRoundedValue(name: "air_pressure", data: data)
         
