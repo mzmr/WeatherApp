@@ -64,7 +64,6 @@ class MasterViewController: UITableViewController {
                 
                 if cityId == locationForecast.cityId {
                     let forecast = locationForecast.getDailyForecast()
-//                    let stateAbbr = .stateAbbr
                     cell.imageView?.image = UIImage(named: forecast.stateAbbr)
                     cell.detailTextLabel?.text = "\(forecast.temp)°C"
                     

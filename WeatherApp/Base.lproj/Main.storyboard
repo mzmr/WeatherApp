@@ -306,7 +306,7 @@
             </objects>
             <point key="canvasLocation" x="1162.3188405797102" y="59.598214285714285"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Maciej Znamirowski-->
         <scene sceneID="HBJ-H9-JQ1">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="owk-3O-zyQ" customClass="MasterViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -349,7 +349,10 @@
                             <outlet property="delegate" destination="owk-3O-zyQ" id="4I4-4Q-aSq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="dV2-Rl-AZO"/>
+                    <navigationItem key="navigationItem" title="Maciej Znamirowski" id="dV2-Rl-AZO">
+                        <barButtonItem key="backBarButtonItem" title="S" id="3Dw-hB-WW7"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4RM-gl-b1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -374,7 +377,7 @@
         <!--Split View Controller-->
         <scene sceneID="hMt-7a-F6F">
             <objects>
-                <splitViewController id="qgh-hw-x2o" sceneMemberID="viewController">
+                <splitViewController id="qgh-hw-x2o" customClass="SplitViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="ni8-kc-mlY" kind="relationship" relationship="masterViewController" id="nBZ-R0-4tj"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="Vht-Y5-Sda"/>
