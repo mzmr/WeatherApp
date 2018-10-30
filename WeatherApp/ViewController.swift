@@ -9,7 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var cityNavigationItem: UINavigationItem!
+    
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var conditionsLabel: UILabel!
@@ -50,6 +52,7 @@ class ViewController: UIViewController {
             nextButton.isEnabled = true
         }
         
+        cityNavigationItem.title = currentCityForecast.cityName
         cityLabel.text = currentCityForecast.cityName
         let dailyForecast = currentCityForecast.getDailyForecast()
         iconImageView.image = UIImage(named: dailyForecast.stateAbbr)
