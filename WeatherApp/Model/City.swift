@@ -17,4 +17,9 @@ class City {
         self.name = name
         self.id = id
     }
+    
+    init(jsonData: [String: Any]) {
+        self.name = "\(jsonData["title"]!)"
+        self.id = "\(jsonData["woeid"]!)"
+    }
 }

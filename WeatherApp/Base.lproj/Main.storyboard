@@ -308,10 +308,10 @@
             </objects>
             <point key="canvasLocation" x="1245" y="-145"/>
         </scene>
-        <!--City list-->
+        <!--City List-->
         <scene sceneID="HBJ-H9-JQ1">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="owk-3O-zyQ" userLabel="City list" customClass="MasterViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="owk-3O-zyQ" userLabel="City List" customClass="MasterViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zid-An-TxA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -353,13 +353,101 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Maciej Znamirowski" id="dV2-Rl-AZO">
                         <barButtonItem key="backBarButtonItem" title="Cities" id="cvU-uL-5qT"/>
-                        <barButtonItem key="rightBarButtonItem" title="Find" id="Uhp-CP-uFt"/>
+                        <barButtonItem key="rightBarButtonItem" title="Find" id="Uhp-CP-uFt">
+                            <connections>
+                                <segue destination="k1e-i0-Ub7" kind="show" id="Jbv-XQ-nAd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4RM-gl-b1Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2165" y="-829"/>
+            <point key="canvasLocation" x="2184" y="-829"/>
+        </scene>
+        <!--City Finder Table Controller-->
+        <scene sceneID="dB5-DG-In7">
+            <objects>
+                <tableViewController id="k1e-i0-Ub7" userLabel="City Finder Table Controller" customClass="SearchResultsTableViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4xe-BJ-jed">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="65m-JR-p5A">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qO9-MO-5GU">
+                                    <rect key="frame" x="358" y="7.6666666666666679" width="48" height="30.000000000000004"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="0.84485035211267601" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="cancelButtonClicked:" destination="k1e-i0-Ub7" eventType="touchUpInside" id="rGf-cs-auF"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydI-u3-fJE">
+                                    <rect key="frame" x="8" y="7.6666666666666679" width="304" height="30.000000000000004"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6E-ce-aY9">
+                                    <rect key="frame" x="320" y="7.6666666666666679" width="30" height="30.000000000000004"/>
+                                    <state key="normal" title="Find"/>
+                                    <connections>
+                                        <action selector="findCities:" destination="k1e-i0-Ub7" eventType="touchUpInside" id="t9i-DR-yfe"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="qO9-MO-5GU" firstAttribute="leading" secondItem="c6E-ce-aY9" secondAttribute="trailing" constant="8" id="2g9-pd-vg2"/>
+                                <constraint firstItem="ydI-u3-fJE" firstAttribute="leading" secondItem="65m-JR-p5A" secondAttribute="leading" constant="8" id="3eB-Zt-5dK"/>
+                                <constraint firstAttribute="trailing" secondItem="qO9-MO-5GU" secondAttribute="trailing" constant="8" id="7lf-ox-YBe"/>
+                                <constraint firstItem="ydI-u3-fJE" firstAttribute="centerY" secondItem="65m-JR-p5A" secondAttribute="centerY" id="N4e-yP-UYS"/>
+                                <constraint firstItem="c6E-ce-aY9" firstAttribute="leading" secondItem="ydI-u3-fJE" secondAttribute="trailing" constant="8" id="c0u-OV-894"/>
+                                <constraint firstItem="c6E-ce-aY9" firstAttribute="centerY" secondItem="65m-JR-p5A" secondAttribute="centerY" id="hIX-u0-w9V"/>
+                                <constraint firstItem="qO9-MO-5GU" firstAttribute="centerY" secondItem="65m-JR-p5A" secondAttribute="centerY" id="o0R-NP-1vu"/>
+                                <constraint firstAttribute="height" constant="45" id="pPC-7x-dcc"/>
+                            </constraints>
+                            <viewLayoutGuide key="safeArea" id="5az-3O-53b"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="JFV-6M-N1g" style="IBUITableViewCellStyleDefault" id="hLx-vU-GdA">
+                                <rect key="frame" x="0.0" y="73" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hLx-vU-GdA" id="X5m-P0-jDB">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JFV-6M-N1g">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="k1e-i0-Ub7" id="j1r-cV-TYG"/>
+                            <outlet property="delegate" destination="k1e-i0-Ub7" id="BM0-HI-T8B"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="cancelButton" destination="qO9-MO-5GU" id="0v1-j4-fEs"/>
+                        <outlet property="cityTextField" destination="ydI-u3-fJE" id="WN6-xA-A3Z"/>
+                        <outlet property="findButton" destination="c6E-ce-aY9" id="d3r-TA-PBh"/>
+                        <segue destination="fky-Lb-c91" kind="unwind" identifier="unwindSegueToMasterView" unwindAction="unwindToMVWithSegue:" id="Lk8-iL-mVe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NBh-XN-HHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fky-Lb-c91" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3087" y="-829"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IxB-Vo-OVs">

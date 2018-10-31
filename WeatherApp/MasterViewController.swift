@@ -21,7 +21,6 @@ class MasterViewController: UITableViewController {
     ]
     
     var cityCells = [Int: String]() //cell tag: city id
-    
     var forecasts = [String: LocationForecast]()
     
     weak var delegate: CitySelectionDelegate?
@@ -29,7 +28,7 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        readWeather()
+        readWeatherForAllCities()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -38,11 +37,16 @@ class MasterViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-    func readWeather() {
+    func readWeatherForAllCities() {
         for city in cities {
-            print("getting forecast for \(city.name)")
-            WeatherAPI().getLocationForecast(locationId: city.id, callback: saveDataAndUpdateView)
+            readWeather(cityId: city.id, cityName: city.name)
         }
+    }
+    
+    
+    func readWeather(cityId: String, cityName: String) {
+        print("getting forecast for \(cityName)")
+        WeatherAPI().getLocationForecast(locationId: cityId, callback: saveDataAndUpdateView)
     }
     
     func saveDataAndUpdateView(forecast: LocationForecast) {
@@ -60,7 +64,7 @@ class MasterViewController: UITableViewController {
             for cell in cells {
                 let cityId = cityCells[cell.tag]
                 
-                print("CityId: \(cityId!), cellTag: \(cell.tag)")
+//                print("CityId: \(cityId!), cellTag: \(cell.tag)")
                 
                 if cityId == locationForecast.cityId {
                     let forecast = locationForecast.getDailyForecast()
@@ -76,6 +80,8 @@ class MasterViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func unwindToMV(segue:UIStoryboardSegue) { }
 
     // MARK: - Table view data source
 
