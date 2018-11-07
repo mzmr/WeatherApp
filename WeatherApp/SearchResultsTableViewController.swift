@@ -7,15 +7,22 @@
 //
 
 import UIKit
+import CoreLocation
 
-class SearchResultsTableViewController: UITableViewController {
+class SearchResultsTableViewController: UITableViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var findButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var cityTextField: UITextField!
     
+    @IBOutlet weak var currentCityLabel: UILabel!
+    @IBOutlet weak var chooseCurrentCityButton: UIButton!
+    
     var cities = [City]()
     var selectedCity: City?
+    
+    var locationManager: CLLocationManager!
+    var currentLocation: Location!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +32,15 @@ class SearchResultsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.startUpdatingLocation()
+        }
     }
 
     @IBAction func cancelButtonClicked(_ sender: UIButton) {
@@ -111,6 +127,43 @@ class SearchResultsTableViewController: UITableViewController {
         destination.cities.append(self.selectedCity!)
         destination.tableView.reloadData()
         destination.readWeather(cityId: self.selectedCity!.id, cityName: self.selectedCity!.name)
+    }
+    
+    // Localization stuff ----------------------------
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation :CLLocation = locations[0] as CLLocation
+        
+        print("user latitude = \(userLocation.coordinate.latitude)")
+        print("user longitude = \(userLocation.coordinate.longitude)")
+        
+//        self.currentCityLabel.text = "\(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude)"
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
+            if (error != nil){
+                print("error in reverseGeocode")
+            }
+            let placemark = placemarks! as [CLPlacemark]
+            if placemark.count > 0 {
+                let placemark = placemarks![0]
+                print("user locality: \(placemark.locality!)")
+                print("user administrative area: \(placemark.administrativeArea!)")
+                print("user country: \(placemark.country!)")
+                
+//                self.labelAdd.text = "\(placemark.locality!), \(placemark.administrativeArea!), \(placemark.country!)"
+                self.currentCityLabel.text = "You're in: \(placemark.locality!), \(placemark.administrativeArea!), \(placemark.country!)"
+                self.currentLocation = Location(
+                    name: placemark.locality!,
+                    lat: "\(userLocation.coordinate.latitude)",
+                    lon: "\(userLocation.coordinate.longitude)"
+                )
+            }
+        }
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error \(error)")
     }
     
 

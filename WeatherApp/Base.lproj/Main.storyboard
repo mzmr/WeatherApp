@@ -290,7 +290,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="City" id="atn-FF-wQ3"/>
+                    <navigationItem key="navigationItem" title="City" id="atn-FF-wQ3">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="xwb-xc-RVU"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="airPressureTextField" destination="Bs7-9t-H0z" id="f5G-gw-ci9"/>
                         <outlet property="arrowImageView" destination="uBp-wy-p0H" id="srW-we-ad4"/>
@@ -355,7 +357,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Maciej Znamirowski" id="dV2-Rl-AZO">
                         <barButtonItem key="backBarButtonItem" title="Cities" id="cvU-uL-5qT"/>
-                        <barButtonItem key="rightBarButtonItem" title="Find" id="Uhp-CP-uFt">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Uhp-CP-uFt">
                             <connections>
                                 <segue destination="k1e-i0-Ub7" kind="show" id="Jbv-XQ-nAd"/>
                             </connections>
@@ -382,8 +384,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="us8-tO-8md">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently you are in: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQ2-qY-bOB">
-                                            <rect key="frame" x="8" y="12.666666666666664" width="159" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You're in: Somewhere, Over, The Rainbow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQ2-qY-bOB">
+                                            <rect key="frame" x="8" y="12.666666666666664" width="318" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -395,7 +397,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="xSF-yz-Vl5" firstAttribute="leading" secondItem="PQ2-qY-bOB" secondAttribute="trailing" constant="186" id="3EO-kO-iJH"/>
                                         <constraint firstItem="xSF-yz-Vl5" firstAttribute="centerY" secondItem="us8-tO-8md" secondAttribute="centerY" id="68W-of-Vsq"/>
                                         <constraint firstAttribute="trailing" secondItem="xSF-yz-Vl5" secondAttribute="trailing" constant="8" id="7Zn-Qh-yzI"/>
                                         <constraint firstAttribute="height" constant="46" id="LN6-hk-KmY"/>
@@ -484,7 +485,9 @@ Q2l0eSBuYW1lIChvciBpdHMgcGFydCkuLi4DA
                     </tableView>
                     <connections>
                         <outlet property="cancelButton" destination="qO9-MO-5GU" id="0v1-j4-fEs"/>
+                        <outlet property="chooseCurrentCityButton" destination="xSF-yz-Vl5" id="DhE-gM-NVK"/>
                         <outlet property="cityTextField" destination="ydI-u3-fJE" id="WN6-xA-A3Z"/>
+                        <outlet property="currentCityLabel" destination="PQ2-qY-bOB" id="yu1-oB-Ui9"/>
                         <outlet property="findButton" destination="c6E-ce-aY9" id="d3r-TA-PBh"/>
                         <segue destination="fky-Lb-c91" kind="unwind" identifier="unwindSegueToMasterView" unwindAction="unwindToMVWithSegue:" id="Lk8-iL-mVe"/>
                     </connections>

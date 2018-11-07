@@ -14,6 +14,8 @@
 		3F5B5B93216C7E6400C4F450 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5B5B92216C7E6400C4F450 /* Assets.xcassets */; };
 		3F5B5B96216C7E6400C4F450 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5B5B94216C7E6400C4F450 /* LaunchScreen.storyboard */; };
 		523E28CB218A51DE00E55D6D /* SearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523E28CA218A51DE00E55D6D /* SearchResultsTableViewController.swift */; };
+		523E28CE219324FA00E55D6D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523E28CD219324FA00E55D6D /* MapKit.framework */; };
+		523E28D02193312700E55D6D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523E28CF2193312700E55D6D /* Location.swift */; };
 		525C5267217E4A9200621EF4 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C5266217E4A9200621EF4 /* WeatherAPI.swift */; };
 		525C5269217E51B600621EF4 /* LocationForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525C5268217E51B600621EF4 /* LocationForecast.swift */; };
 		52892021218496E90079FFB9 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52892020218496E90079FFB9 /* MasterViewController.swift */; };
@@ -31,6 +33,8 @@
 		3F5B5B95216C7E6400C4F450 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3F5B5B97216C7E6400C4F450 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		523E28CA218A51DE00E55D6D /* SearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		523E28CD219324FA00E55D6D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		523E28CF2193312700E55D6D /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		525C5266217E4A9200621EF4 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		525C5268217E51B600621EF4 /* LocationForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationForecast.swift; sourceTree = "<group>"; };
 		52892020218496E90079FFB9 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				523E28CE219324FA00E55D6D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +61,7 @@
 				525C5268217E51B600621EF4 /* LocationForecast.swift */,
 				3F35DC80217EFBCC007809EF /* DailyForecast.swift */,
 				528920222184A0E80079FFB9 /* City.swift */,
+				523E28CF2193312700E55D6D /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -65,6 +71,7 @@
 			children = (
 				3F5B5B8A216C7E6200C4F450 /* WeatherApp */,
 				3F5B5B89216C7E6200C4F450 /* Products */,
+				523E28CC219324FA00E55D6D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,6 +98,14 @@
 				523E28CA218A51DE00E55D6D /* SearchResultsTableViewController.swift */,
 			);
 			path = WeatherApp;
+			sourceTree = "<group>";
+		};
+		523E28CC219324FA00E55D6D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				523E28CD219324FA00E55D6D /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +140,11 @@
 				TargetAttributes = {
 					3F5B5B87216C7E6200C4F450 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -166,6 +186,7 @@
 			files = (
 				525C5267217E4A9200621EF4 /* WeatherAPI.swift in Sources */,
 				525C5269217E51B600621EF4 /* LocationForecast.swift in Sources */,
+				523E28D02193312700E55D6D /* Location.swift in Sources */,
 				523E28CB218A51DE00E55D6D /* SearchResultsTableViewController.swift in Sources */,
 				3F5B5B8E216C7E6200C4F450 /* ViewController.swift in Sources */,
 				3F5B5B8C216C7E6200C4F450 /* AppDelegate.swift in Sources */,
