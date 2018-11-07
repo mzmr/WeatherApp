@@ -42,6 +42,16 @@ class WeatherAPI {
     
     func findCity(cityName: String, callback: @escaping (_: [City]) -> Void) {
         let url = URL(string: "https://www.metaweather.com/api/location/search/?query=\(cityName)")
+        findCity(url: url, callback: callback)
+        
+    }
+    
+    func findCity(latt: String, long: String, callback: @escaping (_: [City]) -> Void) {
+        let url = URL(string: "https://www.metaweather.com/api/location/search/?lattlong=\(latt),\(long)")
+        findCity(url: url, callback: callback)
+    }
+    
+    private func findCity(url: URL?, callback: @escaping (_: [City]) -> Void) {
         if url == nil { return }
         let urlSession = URLSession.shared
         
@@ -73,17 +83,5 @@ class WeatherAPI {
         
         dataTask.resume()
     }
-    
-//    private func jsonToArray(data: Data?) -> [String: Any] {
-//        if data == nil {
-//            return ["error": "data == nil"]
-//        }
-//
-//        do {
-//            return (try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any])!
-//        } catch let err {
-//            return ["error": err]
-//        }
-//    }
     
 }

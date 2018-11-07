@@ -393,6 +393,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSF-yz-Vl5">
                                             <rect key="frame" x="353" y="8" width="53" height="30"/>
                                             <state key="normal" title="Choose"/>
+                                            <connections>
+                                                <action selector="chooseCurrentLocation:" destination="k1e-i0-Ub7" eventType="touchUpInside" id="xXz-TH-P93"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

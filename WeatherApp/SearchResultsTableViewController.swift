@@ -137,8 +137,6 @@ class SearchResultsTableViewController: UITableViewController, CLLocationManager
         print("user latitude = \(userLocation.coordinate.latitude)")
         print("user longitude = \(userLocation.coordinate.longitude)")
         
-//        self.currentCityLabel.text = "\(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude)"
-        
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
             if (error != nil){
@@ -151,7 +149,6 @@ class SearchResultsTableViewController: UITableViewController, CLLocationManager
                 print("user administrative area: \(placemark.administrativeArea!)")
                 print("user country: \(placemark.country!)")
                 
-//                self.labelAdd.text = "\(placemark.locality!), \(placemark.administrativeArea!), \(placemark.country!)"
                 self.currentCityLabel.text = "You're in: \(placemark.locality!), \(placemark.administrativeArea!), \(placemark.country!)"
                 self.currentLocation = Location(
                     name: placemark.locality!,
@@ -166,5 +163,26 @@ class SearchResultsTableViewController: UITableViewController, CLLocationManager
         print("Error \(error)")
     }
     
-
+    
+    @IBAction func chooseCurrentLocation(_ sender: UIButton) {
+        self.cities.removeAll()
+        WeatherAPI().findCity(latt: currentLocation.lat, long: currentLocation.lon, callback: handleCurrentLocationChoice)
+    }
+    
+    func handleCurrentLocationChoice(cities: [City]) {
+        DispatchQueue.main.async {
+            if cities[0].name == self.currentLocation.name {
+                self.selectedCity = City(name: cities[0].name, id: cities[0].id)
+                self.performSegue(withIdentifier: "unwindSegueToMasterView", sender: self)
+            } else {
+                for i in 0..<cities.count {
+                    print("city callback - \(cities[i].name)")
+                    self.cities.append(cities[i])
+                }
+                
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
 }
