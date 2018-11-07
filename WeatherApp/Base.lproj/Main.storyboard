@@ -291,7 +291,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="City" id="atn-FF-wQ3">
-                        <barButtonItem key="rightBarButtonItem" title="Map" id="xwb-xc-RVU"/>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="xwb-xc-RVU">
+                            <connections>
+                                <segue destination="nAh-wc-vek" kind="show" id="JAp-p5-fnO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="airPressureTextField" destination="Bs7-9t-H0z" id="f5G-gw-ci9"/>
@@ -311,6 +315,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1245" y="-178"/>
+        </scene>
+        <!--Location Map-->
+        <scene sceneID="V0K-aZ-P3V">
+            <objects>
+                <viewController id="nAh-wc-vek" userLabel="Location Map" customClass="LocationMapViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ae0-Ll-8Yg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9QO-am-jR6">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9QO-am-jR6" firstAttribute="top" secondItem="F7b-1w-fEn" secondAttribute="top" id="2my-xT-S1I"/>
+                            <constraint firstAttribute="bottom" secondItem="9QO-am-jR6" secondAttribute="bottom" id="3Ve-Ni-wLk"/>
+                            <constraint firstItem="9QO-am-jR6" firstAttribute="trailing" secondItem="F7b-1w-fEn" secondAttribute="trailing" id="ZIM-db-sXm"/>
+                            <constraint firstItem="9QO-am-jR6" firstAttribute="leading" secondItem="F7b-1w-fEn" secondAttribute="leading" id="tk4-OO-HiW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="F7b-1w-fEn"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="9QO-am-jR6" id="b4c-iC-ieq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OTb-8S-BKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2182.608695652174" y="-178.125"/>
         </scene>
         <!--City List-->
         <scene sceneID="HBJ-H9-JQ1">

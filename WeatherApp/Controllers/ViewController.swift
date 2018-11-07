@@ -77,6 +77,16 @@ class ViewController: UIViewController {
         updateView()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! LocationMapViewController
+        destination.selectedCity = Location(
+            name: currentCityForecast.cityName,
+            lat: currentCityForecast.latt,
+            lon: currentCityForecast.long
+        )
+        
+    }
+    
 }
 
 

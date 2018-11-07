@@ -14,6 +14,8 @@ class LocationForecast {
     var currentDayNumber = Int()
     var cityName = String()
     var cityId = String()
+    var latt = String()
+    var long = String()
     
     init() {
         
@@ -29,6 +31,11 @@ class LocationForecast {
         currentDayNumber = 0
         cityName = "\(data["title"]!)"
         cityId = "\(data["woeid"]!)"
+        
+        let lattLong = "\(data["latt_long"]!)"
+        let lattLongArr = lattLong.components(separatedBy: ",")
+        latt = lattLongArr[0]
+        long = lattLongArr[1]
     }
     
     func getDailyForecast() -> DailyForecast {
